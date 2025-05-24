@@ -79,6 +79,29 @@ src/
 
 ---
 
+## Backlog Inicial - Taskito
+
+### User Stories
+
+| Status | ID  | User Story                              |
+|--------|-----|---------------------------------------|
+| ❌     | HU1 | **Create Tasks:** As a user, I want to create tasks with a title and description so I can keep track of what I need to do. |
+| ❌     | HU2 | **View Task List:** As a user, I want to see a list of my tasks ordered by creation date to easily find and manage them. |
+| ❌     | HU3 | **Mark Tasks as Completed:** As a user, I want to mark tasks as completed to differentiate between pending and done work. |
+| ❌     | HU4 | **Delete Tasks:** As a user, I want to delete tasks that I no longer need to keep my task list clean. |
+| ❌     | HU5 | **Edit Tasks:** As a user, I want to edit existing tasks to update their title or description if something changes. |
+| ❌     | HU6 | **Filter Tasks by Status:** As a user, I want to filter tasks to show all, only completed, or only pending tasks so I can focus on what matters. |
+| ❌     | HU7 | **Persist Tasks:** As a user, I want my tasks saved locally in my browser so I don’t lose them on refresh or page close. |
+
+---
+
+### Legend:
+
+- ✅ Completed
+- 🔄 In Progress
+- ❌ Pending
+
+
 ## 🧠 Future Improvements
 
 * Authentication with Firebase Auth
