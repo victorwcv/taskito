@@ -1,8 +1,7 @@
 import { useState } from "react";
-import type { Task } from "../types/task";
 
 type Props = {
-  onAddTask: (task: Task) => void;
+  onAddTask: (title: string, description: string) => void;
 }
 
 const TaskForm: React.FC<Props> = ({ onAddTask }) => {
@@ -21,14 +20,7 @@ const TaskForm: React.FC<Props> = ({ onAddTask }) => {
       setTitle({ ...title, error: undefined });
     }
 
-    const newTask: Task = {
-      id: crypto.randomUUID(),
-      title: title.value.trim(),
-      description: description.value.trim(),
-      createdAt: new Date().toISOString(),
-    };
-
-    onAddTask(newTask);
+    onAddTask( title.value, description.value );
     setTitle({ value: "" });
     setDescription({ value: "" });
   };
