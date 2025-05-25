@@ -1,16 +1,19 @@
 import TaskForm from "./components/TaskForm";
 import KanbanBoard from "./components/KanbanBoard";
 import { useTasks } from "./hooks/useTasks";
+import Navbar from "./components/Navbar";
 
 function App() {
   const { tasks, addTask, removeTask, updateStatus } = useTasks();
 
   return (
-    <div className="min-h-screen flex flex-col items-center">
-      <h1 className="text-3xl font-bold my-4">Hello Taskito</h1>
-      <TaskForm onAddTask={addTask} />
-      <KanbanBoard tasks={tasks} onRemove={removeTask} onStatusChange={updateStatus} />
-    </div>
+    <>
+      <Navbar />
+      <main className="container mx-auto p-4">
+        <TaskForm onAddTask={addTask} />
+        <KanbanBoard tasks={tasks} onRemove={removeTask} onStatusChange={updateStatus} />
+      </main>
+    </>
   );
 }
 

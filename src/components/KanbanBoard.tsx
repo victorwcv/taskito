@@ -13,7 +13,7 @@ const KanbanBoard: React.FC<Props> = ({ tasks, onRemove, onStatusChange }) => {
   const columns = STATUS_LIST;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-6xl mt-8">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full mt-8">
       {columns.map((column) => (
         <KanbanColumn key={column.value} label={column.label}>
           {tasks
