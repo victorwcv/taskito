@@ -14,7 +14,7 @@ const KanbanCard : React.FC<Props> = ({ task, onRemove, onStatusChange }) => {
   return (
     <li className="bg-gray-50 p-3 rounded shadow flex justify-between items-start">
       <div>
-        <h3 className="font-semibold">{task.title}</h3>
+        <h3 className="font-semibold hover:underline cursor-pointer"><a>{task.title}</a></h3>
         {task.description && (
           <p className="text-sm text-gray-600">{task.description}</p>
         )}
@@ -25,7 +25,7 @@ const KanbanCard : React.FC<Props> = ({ task, onRemove, onStatusChange }) => {
       <div className="flex flex-col items-end gap-1 ml-2">
         <button
           onClick={() => onRemove(task.id)}
-          className="text-red-500 hover:text-red-700 text-sm"
+          className="text-red-500 hover:text-red-700 text-sm cursor-pointer"
         >
           🗑
         </button>
