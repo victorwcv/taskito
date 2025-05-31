@@ -1,13 +1,15 @@
 type Props = {
   label: string;
   children: React.ReactNode;
-}
+};
 
 const KanbanColumn: React.FC<Props> = ({ label, children }) => {
   return (
-    <div className={`p-4 rounded-md bg-gray-50 flex flex-col gap-4`}>
+    <div className={`bg-zinc-300 rounded-md p-2 flex-shrink-0 grow basis-0 min-w-[clamp(300px,25%,400px)]`}>
       <h2 className="text-lg font-bold mb-2 border-b border-gray-300 pb-2">{label}</h2>
-      <ul className="space-y-2 min-h-[100px]">{children}</ul>
+      <div className="flex-1 overflow-y-auto p-2">
+        <ul className="space-y-2">{children}</ul>
+      </div>
     </div>
   );
 };

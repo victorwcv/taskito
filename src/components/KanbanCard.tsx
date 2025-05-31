@@ -34,7 +34,7 @@ const KanbanCard : React.FC<Props> = ({ task, onRemove, onStatusChange }) => {
         <select
           value={task.status}
           onChange={(e) => onStatusChange(task.id, e.target.value as Status)}
-          className="text-xs mt-1"
+          className="text-xs mt-1 cursor-pointer border border-gray-300 rounded-md p-1"
         >
           {options.map((option) => (
             <option key={option.value} value={option.value}>

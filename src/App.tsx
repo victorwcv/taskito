@@ -8,15 +8,15 @@ function App() {
   const { tasks, addTask, removeTask, updateStatus } = useTasks();
 
   return (
-    <>
+    <div className="flex flex-col lg:h-screen h-auto">
       <Navbar />
-      <main className="container mx-auto p-4">
+      <main className="flex-1 overflow-hidden">
         <KanbanBoard tasks={tasks} onRemove={removeTask} onStatusChange={updateStatus} />
       </main>
       <CustomDrawer position="right">
         <TaskForm onAddTask={addTask} />
       </CustomDrawer>
-    </>
+    </div>
   );
 }
 

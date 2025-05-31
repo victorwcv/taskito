@@ -1,7 +1,7 @@
 const Navbar: React.FC = () => {
   return (
-    <header className="sm:block hidden w-full h-16 z-40 bg-zinc-900 text-white sticky top-0">
-      <div className="container mx-auto px-4 h-full sm:flex hidden justify-between items-center">
+    <header className="h-16 bg-zinc-900 text-white">
+      <div className="container mx-auto px-4 h-full flex justify-between items-center">
         <a href="https://victorwcv.github.io/taskito/" className="flex items-center gap-2">
           <h1 className="text-2xl font-bold">Taskito -  <span className="text-cyan-400">Kanban Board</span></h1>
         </a> 
