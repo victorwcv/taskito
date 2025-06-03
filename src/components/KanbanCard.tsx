@@ -1,5 +1,5 @@
-import { STATUS_LIST } from "../constants/task-status";
-import type { Status, Task } from "../types/task";
+import { STATUS_LIST } from "@/constants/task-status";
+import type { Status, Task } from "@/types/task";
 
 type Props = {
   task: Task;

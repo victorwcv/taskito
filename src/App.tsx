@@ -1,8 +1,8 @@
-import TaskForm from "./components/TaskForm";
-import KanbanBoard from "./components/KanbanBoard";
-import { useTasks } from "./hooks/useTasks";
-import Navbar from "./components/Navbar";
-import CustomDrawer from "./components/CustomDrawer";
+import TaskForm from "@/components/TaskForm";
+import KanbanBoard from "@/components/KanbanBoard";
+import { useTasks } from "@/hooks/useTasks";
+import Navbar from "@/components/Navbar";
+import CustomDrawer from "@/components/CustomDrawer";
 
 function App() {
   const { tasks, addTask, removeTask, updateStatus } = useTasks();

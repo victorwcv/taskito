@@ -1,5 +1,5 @@
-import { STATUS_LIST } from "../constants/task-status";
-import type { Status, Task } from "../types/task";
+import { STATUS_LIST } from "@/constants/task-status";
+import type { Status, Task } from "@/types/task";
 import KanbanCard from "./KanbanCard";
 import KanbanColumn from "./KanbanColumn";
 
