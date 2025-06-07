@@ -8,9 +8,9 @@ const Navbar: React.FC = () => {
 
         <nav className="block">
           <ul className="flex md:gap-12 gap-8 font font-semibold">
-            <li className="hover:text-primary">
+            {/* <li className="hover:text-primary">
               <a href="https://victorwcv.github.io/"> Back to Portfolio</a>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </div>
