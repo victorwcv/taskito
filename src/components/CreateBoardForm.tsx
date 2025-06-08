@@ -2,7 +2,12 @@ import { useBoardStore } from "@/stores";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-const CreateBoardForm = () => {
+type Props = {
+  closeForm: () => void
+  showCloseButton?: boolean
+};
+
+const CreateBoardForm : React.FC<Props> = ({ closeForm, showCloseButton = false }) => {
   const navigate = useNavigate();
   const { addBoard } = useBoardStore();
 
@@ -40,11 +45,14 @@ const CreateBoardForm = () => {
     setBoardTitle("");
     setColumns(["", "", ""]);
 
-    navigate(`/home`);
+    navigate(`/boards/${boardId}`);
+
+    closeForm();
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4 p-4 shadow-xl rounded-xl bg-zinc-100 dark:bg-zinc-800">
+    <form onSubmit={handleSubmit} className="relative w-full max-w-md space-y-4 p-4 shadow-xl rounded-xl bg-zinc-100 dark:bg-zinc-800">
+      {showCloseButton && <button className="absolute top-4 right-4 btn btn-error" onClick={closeForm}>X</button>}
       <h2 className="text-xl font-semibold">Create New Board</h2>
 
       <div>

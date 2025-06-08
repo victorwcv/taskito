@@ -2,19 +2,20 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { nanoid } from "nanoid";
 
-interface Task {
+export interface Task {
   id: string;
   title: string;
-  description?: string;
+  description: string;
+  createdAt: string;
 }
 
-interface Column {
+export interface Column {
   id: string;
   title: string;
   tasks: Task[];
 }
 
-interface Board {
+export interface Board {
   id: string;
   title: string;
   columns: Column[];
@@ -27,14 +28,16 @@ interface BoardState {
   addBoard: (title: string) => string;
   addColumn: (boardId: string, title: string) => void;
   addTask: (boardId: string, columnId: string, task: Task) => void;
+  getBoardbyId: (id: string) => Board | undefined;
 }
 
 export const useBoardStore = create<BoardState>()(
   devtools(
     persist(
-      (set) => ({
+      (set, get) => ({
+        // State
         boards: [],
-
+        // Actions
         addBoard: (title) => {
           const newBoard = { id: nanoid(), title, columns: [] };
           set((state) => ({
@@ -73,6 +76,8 @@ export const useBoardStore = create<BoardState>()(
                 : board
             ),
           })),
+
+        getBoardbyId: (id) => get().boards.find((board) => board.id === id),
       }),
       {
         name: "kanban-storage", // key en localStorage

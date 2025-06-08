@@ -1,29 +1,30 @@
-import { STATUS_LIST } from "@/constants/task-status";
-import type { Status, Task } from "@/types/task";
 import KanbanCard from "./KanbanCard";
 import KanbanColumn from "./KanbanColumn";
+import { useParams } from "react-router";
+import { useBoardStore} from "@/stores";
 
-type Props = {
-  tasks: Task[];
-  onRemove: (id: string) => void;
-  onStatusChange: (id: string, status: Status) => void;
-};
 
-const KanbanBoard: React.FC<Props> = ({ tasks, onRemove, onStatusChange }) => {
-  const columns = STATUS_LIST;
+const KanbanBoard: React.FC = () => {
+  const { boardId = "" } = useParams<{ boardId: string }>();
+  const boardData = useBoardStore(state => state.getBoardbyId(boardId));
+
+
+  
+  console.log("boardData", boardData);
+  
+  if (!boardData) {
+    return <div className="p-4 text-center text-gray-500">Board not found</div>;
+  }
 
   return (
-    <div className="container mx-auto h-full overflow-x-auto overflow-y-hidden flex lg:flex-row flex-col gap-4 p-8">
-      {columns.map((column) => (
-        <KanbanColumn key={column.value} label={column.label}>
-          {tasks
-            .filter((task) => task.status === column.value)
+    <div className="h-full flex w-fit gap-4 p-8 mx-auto">
+      {boardData.columns.map((column) => (
+        <KanbanColumn key={column.id} label={column.title}>
+          {column.tasks
             .map((task) => (
               <KanbanCard
                 key={task.id}
                 task={task}
-                onRemove={onRemove}
-                onStatusChange={onStatusChange}
               />
             ))}
         </KanbanColumn>

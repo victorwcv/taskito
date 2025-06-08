@@ -15,7 +15,7 @@ const Welcome = () => {
             and efficient way. Get started by creating a new board.
           </p>
           <div className="flex justify-center gap-4">
-            <Link to="/home">
+            <Link to="/boards">
               <button type="button" className="btn btn-primary">
                 Go to Home
               </button>
@@ -26,7 +26,7 @@ const Welcome = () => {
           </div>
         </div>
         <div className="text-center">
-       {showForm && <CreateBoardForm />} 
+       {showForm && <CreateBoardForm closeForm={() => setShowForm(false)} />} 
         </div>
           
       </div>

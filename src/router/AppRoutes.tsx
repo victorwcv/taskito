@@ -11,11 +11,8 @@ function AppRoutes() {
     <Routes>
       <Route element={<MainLayout />}>
         <Route path="/" element={<Welcome />} />
-        <Route path="/home" element={<Home />}>
-          <Route
-            path=":boardId"
-            element={<KanbanBoard tasks={[]} onRemove={() => {}} onStatusChange={() => {}} />}
-          />
+        <Route path="/boards" element={<Home />}>
+          <Route path=":boardId" element={<KanbanBoard />} />
         </Route>
       </Route>
       <Route path="*" element={<ErrorPage />} />
