@@ -3,11 +3,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 
 type Props = {
-  closeForm: () => void
-  showCloseButton?: boolean
+  closeForm: () => void;
+  showCloseButton?: boolean;
 };
 
-const CreateBoardForm : React.FC<Props> = ({ closeForm, showCloseButton = false }) => {
+const CreateBoardForm: React.FC<Props> = ({ closeForm, showCloseButton = false }) => {
   const navigate = useNavigate();
   const { addBoard } = useBoardStore();
 
@@ -51,15 +51,22 @@ const CreateBoardForm : React.FC<Props> = ({ closeForm, showCloseButton = false 
   };
 
   return (
-    <form onSubmit={handleSubmit} className="relative w-full max-w-md space-y-4 p-4 shadow-xl rounded-xl bg-zinc-100 dark:bg-zinc-800">
-      {showCloseButton && <button className="absolute top-4 right-4 btn btn-error" onClick={closeForm}>X</button>}
+    <form
+      onSubmit={handleSubmit}
+      className="relative w-full max-w-md space-y-4 p-8 shadow-xl rounded-xl bg-zinc-100 dark:bg-zinc-800"
+    >
+      {showCloseButton && (
+        <button className="absolute text-white top-4 right-4 btn btn-error" onClick={closeForm}>
+          X
+        </button>
+      )}
       <h2 className="text-xl font-semibold">Create New Board</h2>
 
       <div>
-        <label className="block text-sm m-1">Board Title</label>
+        <label className="block m-1 text-left">Board Title</label>
         <input
           type="text"
-          className="input input-primary"
+          className="input input-primary w-full"
           value={boardTitle}
           onChange={(e) => setBoardTitle(e.target.value)}
           required
@@ -67,13 +74,13 @@ const CreateBoardForm : React.FC<Props> = ({ closeForm, showCloseButton = false 
       </div>
 
       <div>
-        <label className="block text-sm mb-1">Columns</label>
+        <label className="block mb-1 text-left">Columns</label>
         <div className="space-y-2">
           {columns.map((col, index) => (
             <input
               key={index}
               type="text"
-              className="input input-primary"
+              className="input input-primary w-full"
               placeholder={`Column ${index + 1}`}
               value={col}
               onChange={(e) => handleColumnChange(index, e.target.value)}
@@ -83,16 +90,17 @@ const CreateBoardForm : React.FC<Props> = ({ closeForm, showCloseButton = false 
         </div>
 
         {columns.length < 6 && (
-          <button type="button" onClick={handleAddColumn} className="btn btn-primary mt-2">
+          <button type="button" onClick={handleAddColumn} className="btn btn-dash btn-primary w-full mt-2">
             + Add another column
           </button>
         )}
       </div>
 
-      <button type="submit" className="btn btn-primary">
-        Create Board
-      </button>
-
+      <div className="flex justify-end">
+        <button type="submit" className="btn btn-primary right-0">
+          Create Board &gt;
+        </button>
+      </div>
     </form>
   );
 };

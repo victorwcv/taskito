@@ -20,7 +20,7 @@ export function useTasks() {
 
   const addTask = (title: string, description: string = "") => {
     const task: Task = {
-      id: crypto.randomUUID(),
+      id: '',
       title,
       description,
       createdAt: new Date().toISOString(),

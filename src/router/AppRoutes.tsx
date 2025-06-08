@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route, BrowserRouter } from "react-router";
 
 import Home from "@/pages/Home";
 import MainLayout from "@/layouts/MainLayout";
@@ -8,6 +8,7 @@ import KanbanBoard from "@/components/KanbanBoard";
 
 function AppRoutes() {
   return (
+    <BrowserRouter basename="/taskito">
     <Routes>
       <Route element={<MainLayout />}>
         <Route path="/" element={<Welcome />} />
@@ -16,7 +17,7 @@ function AppRoutes() {
         </Route>
       </Route>
       <Route path="*" element={<ErrorPage />} />
-    </Routes>
+    </Routes></BrowserRouter>
   );
 }
 

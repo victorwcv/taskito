@@ -26,8 +26,10 @@ interface BoardState {
 
   // Actions
   addBoard: (title: string) => string;
+  removeBoard: (id: string) => void;
   addColumn: (boardId: string, title: string) => void;
   addTask: (boardId: string, columnId: string, task: Task) => void;
+  removeTask: (boardId: string, columnId: string, taskId: string) => void;
   getBoardbyId: (id: string) => Board | undefined;
 }
 
@@ -45,6 +47,11 @@ export const useBoardStore = create<BoardState>()(
           }));
           return newBoard.id;
         },
+
+        removeBoard: (id) =>
+          set((state) => ({
+            boards: state.boards.filter((board) => board.id !== id),
+          })),
 
         addColumn: (boardId, title) =>
           set((state) => ({
@@ -69,6 +76,25 @@ export const useBoardStore = create<BoardState>()(
                         ? {
                             ...col,
                             tasks: [...col.tasks, { ...task, id: nanoid() }],
+                          }
+                        : col
+                    ),
+                  }
+                : board
+            ),
+          })),
+
+        removeTask: (boardId, columnId, taskId) =>
+          set((state) => ({
+            boards: state.boards.map((board) =>
+              board.id === boardId
+                ? {
+                    ...board,
+                    columns: board.columns.map((col) =>
+                      col.id === columnId
+                        ? {
+                            ...col,
+                            tasks: col.tasks.filter((task) => task.id !== taskId),
                           }
                         : col
                     ),

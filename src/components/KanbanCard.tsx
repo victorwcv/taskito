@@ -2,9 +2,11 @@ import type { Task } from "@/stores";
 
 type Props = {
   task: Task;
+  removeTask: () => void;
 };
 
-const KanbanCard: React.FC<Props> = ({ task }) => {
+const KanbanCard: React.FC<Props> = ({ task, removeTask }) => {
+  
   return (
     <li className="bg-gray-50 p-3 rounded shadow flex justify-between items-start">
       <div>
@@ -21,7 +23,7 @@ const KanbanCard: React.FC<Props> = ({ task }) => {
       </div>
       <div className="flex flex-col items-end gap-1 ml-2">
         <button
-          onClick={() => {}}
+          onClick={removeTask}
           className="text-red-500 hover:text-red-700 text-sm cursor-pointer"
         >
           🗑
