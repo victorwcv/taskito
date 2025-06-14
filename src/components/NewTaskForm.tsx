@@ -1,15 +1,14 @@
 import type { Task } from "@/stores";
 import { useEffect, useRef, useState } from "react";
 import { useBoardStore } from "@/stores";
-import { toast } from 'sonner';
+import { toast } from "sonner";
 
 type Props = {
   boardId: string;
   columnId: string;
-  closeForm: () => void;
 };
 
-const TaskForm: React.FC<Props> = ({ boardId, columnId, closeForm }) => {
+const NewTaskForm: React.FC<Props> = ({ boardId, columnId }) => {
   const [title, setTitle] = useState<{ value: string; error?: string }>({
     value: "",
   });
@@ -42,8 +41,8 @@ const TaskForm: React.FC<Props> = ({ boardId, columnId, closeForm }) => {
     if (ref.current) {
       ref.current.focus();
     }
-    
-    toast.success('Task created successfully');
+
+    toast.success("Task created successfully");
   };
 
   useEffect(() => {
@@ -55,12 +54,8 @@ const TaskForm: React.FC<Props> = ({ boardId, columnId, closeForm }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="relative flex flex-col bg-white shadow-md p-8 gap-4 w-full max-w-md mx-auto"
-      onClick={(e) => e.stopPropagation()}
+      className="relative flex flex-col gap-4 w-full max-w-md mx-auto"
     >
-      <button className="absolute text-white top-4 right-4 btn btn-error" onClick={closeForm}>
-        X
-      </button>
       <div className="pt-8 space-y-4">
         <h2 className="text-2xl font-bold">New Task</h2>
         <input
@@ -89,4 +84,4 @@ const TaskForm: React.FC<Props> = ({ boardId, columnId, closeForm }) => {
   );
 };
 
-export default TaskForm;
+export default NewTaskForm;

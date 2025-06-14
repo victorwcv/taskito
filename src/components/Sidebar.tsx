@@ -1,10 +1,13 @@
 import { Link, useNavigate, useParams } from "react-router";
+import { useEffect, useState } from "react";
 import { useBoardStore } from "@/stores";
 import { toast } from "sonner";
-import { useEffect, useState } from "react";
+import { useModalStore } from "@/stores";
+import NewTaskForm from "./NewTaskForm";
 
 const Sidebar = () => {
   const { boards, removeBoard } = useBoardStore();
+  const { openModal } = useModalStore();
   const [justDeleted, setJustDeleted] = useState(false);
   const navigate = useNavigate();
   const boardIdUrl = useParams().boardId || "";
@@ -32,13 +35,18 @@ const Sidebar = () => {
     setJustDeleted(true);
   };
 
+  const handleNewTask = () => {
+    if (!boardIdUrl) return;
+    const board = boards.find((board) => board.id === boardIdUrl);
+    const column = board?.columns[0].id || '';
+    openModal(<NewTaskForm boardId={boardIdUrl} columnId={column} />);
+  };
+
   return (
     <div className="flex flex-col h-screen w-[300px]  bg-zinc-800 text-white">
       {/* Sidebar header */}
       <div className="h-20 flex flex-col justify-center px-4 bg-zinc-900">
-        <h1 className="text-2xl font-semibold">
-          Taskito
-        </h1>
+        <h1 className="text-2xl font-semibold">Taskito</h1>
         <small className="text-accent-500">Kanban Board App</small>
       </div>
       {/* Sidebar content */}
@@ -68,7 +76,11 @@ const Sidebar = () => {
       </div>
       {/* Sidebar footer */}
       <div className="p-4 flex flex-col gap-3">
-        <button className="btn">Create New Task</button>
+        {boardIdUrl && (
+          <button className="btn" onClick={handleNewTask}>
+            Create New Task
+          </button>
+        )}
 
         <Link className="btn" to="/boards/new">
           Create New Board
