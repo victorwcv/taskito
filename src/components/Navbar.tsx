@@ -1,8 +1,8 @@
 const Navbar: React.FC = () => {
   return (
-    <header className="h-16 bg-zinc-900 text-white">
+    <header className="h-20 bg-zinc-100 shadow">
       <div className="container mx-auto px-4 h-full flex justify-between items-center">
-        <a href="https://victorwcv.github.io/taskito/" className="flex items-center gap-2">
+        <a href="https://victorwcv.github.io/taskito/" className="flex items-center gap-2 sm:invisible">
           <h1 className="text-2xl font-bold">Taskito -  <span className="text-accent-500">Kanban Board</span></h1>
         </a> 
 

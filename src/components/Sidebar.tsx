@@ -33,17 +33,17 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen w-64 bg-zinc-800 text-white">
+    <div className="flex flex-col h-screen w-[300px]  bg-zinc-800 text-white">
       {/* Sidebar header */}
-      <div className="p-4 bg-zinc-900">
+      <div className="h-20 flex flex-col justify-center px-4 bg-zinc-900">
         <h1 className="text-2xl font-semibold">
-          VC / <span className="text-accent-500">Taskito</span>
+          Taskito
         </h1>
-        <small className="text-gray-400">Kanban Board App</small>
+        <small className="text-accent-500">Kanban Board App</small>
       </div>
       {/* Sidebar content */}
       <div className="flex-1 p-4">
-        <h2 className="text-gray-400 text-sm mb-2">My Projects </h2>
+        <h2 className="text-gray-400 text-sm mt-6 mb-2">My Projects </h2>
         <ul>
           {boardList.map((board) => (
             <li
@@ -68,6 +68,8 @@ const Sidebar = () => {
       </div>
       {/* Sidebar footer */}
       <div className="p-4 flex flex-col gap-3">
+        <button className="btn">Create New Task</button>
+
         <Link className="btn" to="/boards/new">
           Create New Board
         </Link>

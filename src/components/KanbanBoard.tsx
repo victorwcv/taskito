@@ -21,21 +21,19 @@ const KanbanBoard: React.FC = () => {
   }
 
   return (
-    <>
-      <div className="h-full flex w-fit gap-4 p-8 mx-auto">
-        {boardData.columns.map((column) => (
-          <KanbanColumn key={column.id} label={column.title}>
-            {column.tasks.map((task) => (
-              <KanbanCard
-                key={task.id}
-                task={task}
-                removeTask={() => handleRemoveTask(column.id, task.id)}
-              />
-            ))}
-          </KanbanColumn>
-        ))}
-      </div>
-    </>
+    <div className="h-full flex w-fit gap-4 p-8 mx-auto">
+      {boardData.columns.map((column) => (
+        <KanbanColumn key={column.id} label={column.title}>
+          {column.tasks.map((task) => (
+            <KanbanCard
+              key={task.id}
+              task={task}
+              removeTask={() => handleRemoveTask(column.id, task.id)}
+            />
+          ))}
+        </KanbanColumn>
+      ))}
+    </div>
   );
 };
 
