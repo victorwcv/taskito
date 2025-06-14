@@ -1,6 +1,7 @@
 import { useBoardStore } from "@/stores";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { toast } from "sonner";
 
 type Props = {
   closeForm: () => void;
@@ -44,6 +45,8 @@ const CreateBoardForm: React.FC<Props> = ({ closeForm, showCloseButton = false }
     // Reset
     setBoardTitle("");
     setColumns(["", "", ""]);
+
+    toast.success("Board created successfully");
 
     navigate(`/boards/${boardId}`);
 
