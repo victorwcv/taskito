@@ -1,10 +1,6 @@
-import CreateBoardForm from "@/components/CreateBoardForm";
-import { useState } from "react";
 import { Link } from "react-router";
 
 const Welcome = () => {
-  const [showForm, setShowForm] = useState(false);
-
   return (
     <div className="relative hero bg-base-200 min-h-screen bg-[url('/welcome-bg.webp')] bg-cover bg-center">
       <div className="absolute inset-0 bg-black/70 z-0" />
@@ -16,20 +12,12 @@ const Welcome = () => {
             and efficient way. Get started by creating a new board.
           </p>
           <div className="flex justify-center gap-4">
-            <Link to="/boards">
-              <button type="button" className="btn btn-primary">
-                Go to Home
-              </button>
-            </Link>
-            <button className="btn btn-primary" onClick={() => setShowForm(true)}>
+            <Link to="/boards/new" className="btn btn-primary" >
               Get Started
-            </button>
+            </Link>
           </div>
         </div>
-        <div className="text-center">
-       {showForm && <CreateBoardForm closeForm={() => setShowForm(false)}  showCloseButton/>} 
-        </div>
-          
+        <div className="text-center"></div>
       </div>
     </div>
   );

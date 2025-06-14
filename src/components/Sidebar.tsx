@@ -1,72 +1,83 @@
-import { Link, useParams } from "react-router"
+import { Link, useNavigate, useParams } from "react-router";
 import { useBoardStore } from "@/stores";
+import { toast } from "sonner";
+import { useEffect, useState } from "react";
 
 const Sidebar = () => {
   const { boards, removeBoard } = useBoardStore();
+  const [justDeleted, setJustDeleted] = useState(false);
+  const navigate = useNavigate();
   const boardIdUrl = useParams().boardId || "";
   const boardList = boards.map((board) => ({
     id: board.id,
     title: board.title,
   }));
 
+  useEffect(() => {
+    if (!justDeleted) return;
+
+    if (boards.length > 0) {
+      const lastBoard = boards[boards.length - 1];
+      navigate(`/boards/${lastBoard.id}`);
+    } else {
+      navigate("/boards");
+    }
+
+    setJustDeleted(false);
+  }, [boards, justDeleted, navigate]);
+
   const handleDeleteBoard = (boardId: string) => {
     removeBoard(boardId);
+    toast.success("Board deleted successfully");
+    setJustDeleted(true);
   };
 
-  const handleCreateBoard = () => {
-    console.log("Create board");
-  };
-  
   return (
-     <div className="flex flex-col h-screen w-64 bg-zinc-800 text-white">
-        {/* Sidebar header */}
-        <div className="p-4 bg-zinc-900">
-          <h1 className="text-2xl font-semibold">
-            VC / <span className="text-accent-500">Taskito</span>
-          </h1>
-          <small className="text-gray-400">Kanban Board App</small>
-        </div>
-        {/* Sidebar content */}
-        <div className="flex-1 p-4">
-          <h2 className="text-gray-400 text-sm mb-2">My Projects </h2>
-          <ul>
-            {boardList.map((board) => (
-              <li key={board.id} className="mb-2">
-                -{" "}
-                <Link
-                  to={`/boards/${board.id}`}
-                  className={`hover:underline underline-offset-4 ${
-                    board.id === boardIdUrl ? "text-accent-500" : ""
-                  }`}
-                >
-                  {board.title || <span className="text-gray-500 italic">No title</span>}
-                </Link>
-                <button
-                  className="float-right cursor-pointer"
-                  title="Delete"
-                  onClick={() => handleDeleteBoard(board.id)}
-                >
-                  ❌
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-        {/* Sidebar footer */}
-        <div className="p-4 flex flex-col gap-3">
-          <button className="btn btn-primary" onClick={handleCreateBoard}>
-            <Link className="w-full" to="/boards/new">
-              Create New Board
-            </Link>
-          </button>
-          <button className="btn btn-primary">
-            <Link className="w-full" to="/">
-              Back to Welcome
-            </Link>
-          </button>
-        </div>
+    <div className="flex flex-col h-screen w-64 bg-zinc-800 text-white">
+      {/* Sidebar header */}
+      <div className="p-4 bg-zinc-900">
+        <h1 className="text-2xl font-semibold">
+          VC / <span className="text-accent-500">Taskito</span>
+        </h1>
+        <small className="text-gray-400">Kanban Board App</small>
       </div>
-  )
-}
+      {/* Sidebar content */}
+      <div className="flex-1 p-4">
+        <h2 className="text-gray-400 text-sm mb-2">My Projects </h2>
+        <ul>
+          {boardList.map((board) => (
+            <li
+              key={board.id}
+              className={`hover:underline underline-offset-4 py-2 ${
+                board.id === boardIdUrl ? "text-accent-500 pl-2 border-l-4 border-accent-500" : ""
+              }`}
+            >
+              <Link to={`/boards/${board.id}`}>
+                {board.title || <span className="text-gray-500 italic">No title</span>}
+              </Link>
+              <button
+                className="float-right cursor-pointer"
+                title="Delete"
+                onClick={() => handleDeleteBoard(board.id)}
+              >
+                ❌
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+      {/* Sidebar footer */}
+      <div className="p-4 flex flex-col gap-3">
+        <Link className="btn" to="/boards/new">
+          Create New Board
+        </Link>
 
-export default Sidebar
+        <Link className="btn" to="/">
+          Back to Welcome
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default Sidebar;

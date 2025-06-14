@@ -5,6 +5,7 @@ import Welcome from "@/pages/Welcome";
 import ErrorPage from "@/pages/ErrorPage";
 import KanbanBoard from "@/components/KanbanBoard";
 import CreateBoard from "@/pages/CreateBoard";
+import { NoBoards } from "@/components/NoBoards";
 
 function AppRoutes() {
   return (
@@ -12,6 +13,7 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<Welcome />} />
         <Route path="/boards" element={<MainLayout />}>
+          <Route index element={<NoBoards />} />
           <Route path="new" element={<CreateBoard />} />
           <Route path=":boardId" element={<KanbanBoard />} />
         </Route>
