@@ -1,0 +1,11 @@
+{
+  "welcome": {
+  "title": "Bienvenido a",
+  "title2": "Taskito",
+  "description": "Organiza tu caos, una tarea a la vez. Crea tableros kanban, gestiona tu flujo de trabajo y mantente productivo con una interfaz limpia y sencilla.",
+  "getStarted": "Empezar",
+  "demo": "Probar demo",
+  "footer": "Taskito · Desarrollado por Victor Ccanchi"
+}
+
+}

@@ -1,0 +1,10 @@
+{
+  "welcome": {
+    "title": "Welcome to",
+    "title2": "Taskito",
+    "description": "Organize your chaos, one task at a time. Create kanban boards, manage your workflow, and stay productive with a clean, simple interface.",
+    "getStarted": "Get Started",
+    "demo": "Try Demo", 
+    "footer": "Taskito · Built by Victor Ccanchi"
+  }
+}
