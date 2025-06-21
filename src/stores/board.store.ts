@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { nanoid } from "nanoid";
+import { demoBoard } from "@/mocks/demo-board";
 
 export interface Task {
   id: string;
@@ -38,7 +39,7 @@ export const useBoardStore = create<BoardState>()(
     persist(
       (set, get) => ({
         // State
-        boards: [],
+        boards: [demoBoard],
         // Actions
         addBoard: (title) => {
           const newBoard = { id: nanoid(), title, columns: [] };
