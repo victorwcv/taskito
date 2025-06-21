@@ -1,13 +1,13 @@
 import { Link, useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
-import { useBoardStore } from "@/stores";
+import { useBoardStore, useModalStore, useAppConfigStore } from "@/stores";
 import { toast } from "sonner";
-import { useModalStore } from "@/stores";
 import NewTaskForm from "./NewTaskForm";
 
 const Sidebar = () => {
   const { boards, removeBoard } = useBoardStore();
   const { openModal } = useModalStore();
+  const { config } = useAppConfigStore();
   const [justDeleted, setJustDeleted] = useState(false);
   const navigate = useNavigate();
   const boardIdUrl = useParams().boardId || "";
@@ -38,59 +38,61 @@ const Sidebar = () => {
   const handleNewTask = () => {
     if (!boardIdUrl) return;
     const board = boards.find((board) => board.id === boardIdUrl);
-    const column = board?.columns[0].id || '';
+    const column = board?.columns[0].id || "";
     openModal(<NewTaskForm boardId={boardIdUrl} columnId={column} />);
   };
 
   return (
-    <div className="flex flex-col h-screen w-[300px]  bg-zinc-800 text-white">
-      {/* Sidebar header */}
-      <div className="h-20 flex flex-col justify-center px-4 bg-zinc-900">
-        <h1 className="text-2xl font-semibold">Taskito</h1>
-        <small className="text-accent-500">Kanban Board App</small>
-      </div>
-      {/* Sidebar content */}
-      <div className="flex-1 p-4">
-        <h2 className="text-gray-400 text-sm mt-6 mb-2">My Projects </h2>
-        <ul>
-          {boardList.map((board) => (
-            <li
-              key={board.id}
-              className={`hover:underline underline-offset-4 py-2 ${
-                board.id === boardIdUrl ? "text-accent-500 pl-2 border-l-4 border-accent-500" : ""
-              }`}
-            >
-              <Link to={`/boards/${board.id}`}>
-                {board.title || <span className="text-gray-500 italic">No title</span>}
-              </Link>
-              <button
-                className="float-right cursor-pointer"
-                title="Delete"
-                onClick={() => handleDeleteBoard(board.id)}
+    <aside className={`${config.isOpenSidebar ? "md:block" : "md:hidden"}`}>
+      <div className="flex flex-col h-screen w-[300px] bg-zinc-800 text-white ">
+        {/* Sidebar header */}
+        <div className="h-20 flex flex-col justify-center px-4 bg-zinc-900">
+          <h1 className="text-2xl font-semibold">Taskito</h1>
+          <small className="text-accent-500">Kanban Board App</small>
+        </div>
+        {/* Sidebar content */}
+        <div className="flex-1 p-4">
+          <h2 className="text-gray-400 text-sm mt-6 mb-2">My Kanban Boards </h2>
+          <ul>
+            {boardList.map((board) => (
+              <li
+                key={board.id}
+                className={`hover:underline underline-offset-4 py-2 ${
+                  board.id === boardIdUrl ? "text-accent-500 pl-2 border-l-4 border-accent-500" : ""
+                }`}
               >
-                ❌
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-      {/* Sidebar footer */}
-      <div className="p-4 flex flex-col gap-3">
-        {boardIdUrl && (
-          <button className="btn" onClick={handleNewTask}>
-            Create New Task
-          </button>
-        )}
+                <Link to={`/boards/${board.id}`}>
+                  {board.title || <span className="text-gray-500 italic">No title</span>}
+                </Link>
+                <button
+                  className="float-right cursor-pointer"
+                  title="Delete"
+                  onClick={() => handleDeleteBoard(board.id)}
+                >
+                  ❌
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {/* Sidebar footer */}
+        <div className="p-4 flex flex-col gap-3">
+          {boardIdUrl && (
+            <button className="btn" onClick={handleNewTask}>
+              Create New Task
+            </button>
+          )}
 
-        <Link className="btn" to="/boards/new">
-          Create New Board
-        </Link>
+          <Link className="btn" to="/boards/new">
+            Create New Board
+          </Link>
 
-        <Link className="btn" to="/">
-          Back to Welcome
-        </Link>
+          <Link className="btn" to="/">
+            Back to Welcome
+          </Link>
+        </div>
       </div>
-    </div>
+    </aside>
   );
 };
 

@@ -1,6 +1,7 @@
 import { useBoardStore } from "@/stores";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+import { MessageCircleWarning, Minus } from "lucide-react";
 import { toast } from "sonner";
 
 const CreateBoardForm: React.FC = () => {
@@ -19,6 +20,14 @@ const CreateBoardForm: React.FC = () => {
   const handleAddColumn = () => {
     if (columns.length < 6) {
       setColumns([...columns, ""]);
+    }
+  };
+
+  const handleRemoveColumn = (index: number) => {
+    if (columns.length > 3) {
+      const updated = [...columns];
+      updated.splice(index, 1);
+      setColumns(updated);
     }
   };
 
@@ -47,53 +56,61 @@ const CreateBoardForm: React.FC = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="relative w-full max-w-md space-y-4 p-8 shadow-xl rounded bg-white dark:bg-zinc-800"
-    >
-      <h2 className="text-xl font-semibold">Create New Board</h2>
-
+    <form onSubmit={handleSubmit}>
       <div>
-        <label className="block m-1 text-left">Board Title</label>
+        <label className="block text-xl m-1 font-semibold">Board Title</label>
         <input
           type="text"
-          className="input input-primary w-full"
+          className="input input-primary"
           value={boardTitle}
           onChange={(e) => setBoardTitle(e.target.value)}
           required
         />
       </div>
 
-      <div>
-        <label className="block mb-1 text-left">Columns</label>
-        <div className="space-y-2">
+      <div className="mt-4">
+        <label className="block m-1 text-lg">Columns</label>
+        <div className="flex gap-2 flex-1/5">
           {columns.map((col, index) => (
             <input
               key={index}
               type="text"
-              className="input input-primary w-full"
+              className="input input-primary"
               placeholder={`Column ${index + 1}`}
               value={col}
               onChange={(e) => handleColumnChange(index, e.target.value)}
               required={index < 3} // los primeros 3 son requeridos
             />
           ))}
-        </div>
-
-        {columns.length < 6 && (
           <button
             type="button"
-            onClick={handleAddColumn}
-            className="btn btn-dash btn-primary w-full mt-2"
+            className="btn btn-primary btn-dash"
+            onClick={() => handleRemoveColumn(columns.length - 1)}
+            disabled={columns.length <= 3}
           >
-            + Add another column
+            <span className="sr-only">Remove Column</span>
+            <Minus className="w-5 h-5" />
           </button>
-        )}
+        </div>
+
+        <div className="text-sm text-gray-500 mt-2 flex items-center gap-1">
+          <MessageCircleWarning size={16} />
+          <p>You can add up to 6 columns. The first 3 are required.</p>
+        </div>
       </div>
 
-      <div className="flex justify-end">
-        <button type="submit" className="btn btn-primary right-0">
-          Create Board &gt;
+      <div className="mt-6 flex justify-end gap-4">
+        <button
+          type="button"
+          onClick={handleAddColumn}
+          className="btn btn-dash btn-primary w-52"
+          disabled={columns.length >= 6}
+        >
+          + Add another column
+        </button>
+
+        <button type="submit" className="btn btn-primary w-52">
+          Create Board
         </button>
       </div>
     </form>

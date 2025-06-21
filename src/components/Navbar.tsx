@@ -1,10 +1,23 @@
-const Navbar: React.FC = () => {
+import { AlignJustify } from 'lucide-react';
+import { useAppConfigStore } from '@/stores';
+
+interface Props {
+  children?: React.ReactNode
+}
+
+const Navbar: React.FC<Props> = ({children}) => {
+  const { toggleSidebar } = useAppConfigStore();
+  
   return (
     <header className="h-20 bg-zinc-100 shadow">
-      <div className="container mx-auto px-4 h-full flex justify-between items-center">
-        <a href="https://victorwcv.github.io/taskito/" className="flex items-center gap-2 sm:invisible">
-          <h1 className="text-2xl font-bold">Taskito -  <span className="text-accent-500">Kanban Board</span></h1>
-        </a> 
+      <div className="mx-auto px-8 h-full flex items-center space-x-8">
+        <button className='p-2 rounded hover:bg-zinc-200 transition-colors border border-zinc-300 cursor-pointer'
+          onClick={() => toggleSidebar()}>
+          <AlignJustify className="w-6 h-6 text-zinc-500" />
+        </button>
+        <div>
+          {children ? children : null}
+        </div>
 
         <nav className="block">
           <ul className="flex md:gap-12 gap-8 font font-semibold">
