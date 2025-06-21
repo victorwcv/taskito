@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useBoardStore, useModalStore, useAppConfigStore } from "@/stores";
 import { toast } from "sonner";
 import NewTaskForm from "./NewTaskForm";
+import ToggleSidebarButton from "./ToggleSidebarButton";
 
 const Sidebar = () => {
   const { boards, removeBoard } = useBoardStore();
@@ -43,12 +44,17 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className={`${config.isOpenSidebar ? "md:block" : "md:hidden"}`}>
+    <aside className={`${config.isOpenSidebar ? "block" : "hidden"} md:relative absolute z-50`}>
       <div className="flex flex-col h-screen w-[300px] bg-zinc-800 text-white ">
         {/* Sidebar header */}
-        <div className="h-20 flex flex-col justify-center px-4 bg-zinc-900">
-          <h1 className="text-2xl font-semibold">Taskito</h1>
-          <small className="text-accent-500">Kanban Board App</small>
+        <div className="h-20 flex items-center justify-between px-4 bg-zinc-900">
+          <div>
+            <h1 className="text-2xl font-semibold">Taskito</h1>
+            <small className="text-accent-500">Kanban Board App</small>
+          </div>
+          <div className="block md:hidden">
+            <ToggleSidebarButton />
+          </div>
         </div>
         {/* Sidebar content */}
         <div className="flex-1 p-4">

@@ -3,7 +3,7 @@ import { Routes, Route, BrowserRouter } from "react-router";
 import MainLayout from "@/layouts/MainLayout";
 import Welcome from "@/pages/Welcome";
 import ErrorPage from "@/pages/ErrorPage";
-import KanbanBoard from "@/components/KanbanBoard";
+import KanbanBoard from "@/pages/KanbanBoard";
 import CreateBoard from "@/pages/CreateBoard";
 import { NoBoards } from "@/components/NoBoards";
 

@@ -1,16 +1,14 @@
 import CreateBoardForm from "@/components/CreateBoardForm";
-import Navbar from "@/components/Navbar";
 
 const CreateBoard = () => {
   return (
-    <section>
-      <Navbar>
-        <h1 className="text-2xl font-semibold">Create a New Board</h1>
-      </Navbar>
-      <div className="max-w-7xl mx-auto mt-8">
-        <div className="p-4 md:p-8">
+    <section className="h-full">
+      <h1 className="text-xl font-bold p-8">Create a New Board</h1>
+      <div className="max-w-7xl mx-auto mt-8 px-8">
+        {/* Form to create a new board */}
+        
           <CreateBoardForm />
-        </div>
+        
       </div>
     </section>
   );

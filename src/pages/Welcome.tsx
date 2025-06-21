@@ -27,7 +27,7 @@ const Welcome = () => {
             {t("welcome.description")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <Link to="/boards/new" className="btn btn-primary text-lg shadow-md gap-2">
+            <Link to="/boards" className="btn btn-primary text-lg shadow-md gap-2">
               {t("welcome.getStarted")}
               <ArrowRight className="w-5 h-5" />
             </Link>

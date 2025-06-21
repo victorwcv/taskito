@@ -61,7 +61,7 @@ const CreateBoardForm: React.FC = () => {
         <label className="block text-xl m-1 font-semibold">Board Title</label>
         <input
           type="text"
-          className="input input-primary"
+          className="input input-primary md:w-1/3 w-full"
           value={boardTitle}
           onChange={(e) => setBoardTitle(e.target.value)}
           required
@@ -70,12 +70,12 @@ const CreateBoardForm: React.FC = () => {
 
       <div className="mt-4">
         <label className="block m-1 text-lg">Columns</label>
-        <div className="flex gap-2 flex-1/5">
+        <div className="flex md:flex-row flex-col gap-2 md:flex-1/5 items-center">
           {columns.map((col, index) => (
             <input
               key={index}
               type="text"
-              className="input input-primary"
+              className="input input-primary md:w-1/5 w-full"
               placeholder={`Column ${index + 1}`}
               value={col}
               onChange={(e) => handleColumnChange(index, e.target.value)}
@@ -99,17 +99,17 @@ const CreateBoardForm: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-6 flex justify-end gap-4">
+      <div className="mt-6 flex sm:flex-row flex-col justify-end gap-4">
         <button
           type="button"
           onClick={handleAddColumn}
-          className="btn btn-dash btn-primary w-52"
+          className="btn btn-dash btn-primary sm:w-52 w-full"
           disabled={columns.length >= 6}
         >
           + Add another column
         </button>
 
-        <button type="submit" className="btn btn-primary w-52">
+        <button type="submit" className="btn btn-primary sm:w-52 w-full">
           Create Board
         </button>
       </div>

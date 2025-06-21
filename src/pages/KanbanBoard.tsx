@@ -1,5 +1,5 @@
-import KanbanCard from "./KanbanCard";
-import KanbanColumn from "./KanbanColumn";
+import KanbanCard from "@/components/KanbanCard";
+import KanbanColumn from "@/components/KanbanColumn";
 import { useParams } from "react-router";
 import { useBoardStore } from "@/stores";
 
