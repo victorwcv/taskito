@@ -1,11 +1,27 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router";
 import { ArrowRight } from "lucide-react";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
+import { useAppConfigStore } from "@/stores";
+import { useEffect } from "react";
 
 const Welcome = () => {
   const { t } = useTranslation();
+  const { visited } = useAppConfigStore();
 
+  // Marcar como visitado al cargar la página
+  useEffect(() => {
+    return () => {
+      visited();
+    }
+  }, [visited]);
+
+  if (useAppConfigStore.getState().config.isVisited) {
+    // Si ya se ha visitado, redirigir a la página de tableros
+    return <Navigate to="/boards" />;
+  }
+
+  // Si no se ha visitado, mostrar la página de bienvenida
   return (
     <section className="relative min-h-dvh bg-cover bg-center bg-no-repeat bg-[url('/welcome-bg.webp')]">
       {/* Overlay degradado */}
